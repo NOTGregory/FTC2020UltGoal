@@ -1,0 +1,51 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.*;
+import com.qualcomm.robotcore.eventloop.opmode.*;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
+
+//this isn't that good because it barely even has code in it but I will make further additions to it later
+
+@Autonomous
+public class TestAutoRobot {
+    //is something wrong with the name?
+
+    private DcMotor leftDrive = null;
+    private DcMotor rightDrive = null;
+    private int drive = 1;
+    private int turn = 0;
+
+    private double rightPower;
+    private double leftPower;
+
+    private float elapsedTime = 0;
+    //lmao is this supposed to be a float or something else
+
+    private HardwareMap hwMap = null;
+
+    public void init(HardwareMap hw) {
+        hwMap = hw;
+        leftDrive = hw.get(DcMotor.class, "left_drive");
+        rightDrive = hw.get(DcMotor.class, "right_drive");
+    }
+
+
+    public void loop()
+    {
+        leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
+        rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+
+        /*
+        checking code
+        */
+
+        leftDrive.setPower(leftPower);
+        rightDrive.setPower(rightPower);
+    }
+
+    public float getElapsedTime() {
+        return elapsedTime;
+    }
+}
